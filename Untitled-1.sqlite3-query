@@ -1,0 +1,44 @@
+-- database: ./students.db
+
+-- Updating courses based on student specialties
+
+-- Informatyka - Iван Petrov
+UPDATE courses SET course_name = "Osnovy prohramuvannya", course_instructor = "Viktor Sychov" WHERE course_id = 1;
+
+-- Matematyka - Mariya Sidorova
+UPDATE courses SET course_name = "Vyshcha matematyka", course_instructor = "Serhii Kuznetsov" WHERE course_id = 2;
+
+-- Fizyka - Oleksii Ivanov
+UPDATE courses SET course_name = "Fizyka", course_instructor = "Ivan Hroznyy" WHERE course_id = 3;
+
+-- Khimiya - Kateryna Smyrnova
+UPDATE courses SET course_name = "Orhanichna khimiya", course_instructor = "Mariya Kozlova" WHERE course_id = 4;
+
+-- Informatyka - Dmytro Fedorov
+UPDATE courses SET course_name = "Struktury danykh na Python", course_instructor = "Petro Orlov" WHERE course_id = 5;
+
+-- Biolohiya - Anna Volkova
+UPDATE courses SET course_name = "Molekulyarna biolohiya", course_instructor = "Anna Tretiyakova" WHERE course_id = 6;
+
+-- Istoriya - Serhii Morozov (add new course)
+INSERT OR REPLACE INTO courses (course_id, course_name, course_instructor) VALUES 
+(7, "Istoriya svitovoi tsyvilizatsii", "Oleh Taras");
+
+-- Anhliiska mova - Olha Lebedeva (add new course)
+INSERT OR REPLACE INTO courses (course_id, course_name, course_instructor) VALUES 
+(8, "Praktychnyi anhliiskyi", "Maryna Volkova");
+
+-- View updated courses
+SELECT * FROM courses;
+
+-- View students
+SELECT * FROM students;
+
+
+CREATE TABLE IF NOT EXISTS student_courses (
+    student_id INTEGER,
+    course_id INTEGER,
+    PRIMARY KEY (student_id, course_id),
+    FOREIGN KEY (student_id) REFERENCES students(student_id),
+    FOREIGN KEY (course_id) REFERENCES courses(course_id)
+);
